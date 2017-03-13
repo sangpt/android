@@ -1,45 +1,44 @@
 package com.example.oniichan.lunchlist;
 
-
 public class Restaurant {
-  private String name = "";
-  private String address = "";
-  private String type = "";
-  private String discount = "";
-
-  public String getDiscount() {
-    return discount;
-  }
-
-  public void setDiscount(String discount) {
-    this.discount = discount;
-  }
-
+  private String name="";
+  private String address="";
+  private String type="";
+  private String notes="";
+  
   public String getName() {
-    return (name);
+    return(name);
   }
-
+  
   public void setName(String name) {
-    this.name = name;
+    this.name=name;
   }
-
+  
   public String getAddress() {
-    return (address);
+    return(address);
   }
-
+  
   public void setAddress(String address) {
-    this.address = address;
+    this.address=address;
   }
-
+  
   public String getType() {
-    return (type);
+    return(type);
   }
-
+  
   public void setType(String type) {
-    this.type = type;
+    this.type=type;
   }
-
+  
+  public String getNotes() {
+    return(notes);
+  }
+  
+  public void setNotes(String notes) {
+    this.notes=notes;
+  }
+  
   public String toString() {
-    return (getName());
+    return(getName());
   }
 }
