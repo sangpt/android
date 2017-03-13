@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="4dip"
+    android:id="@+id/bg"
+    >
+  <ImageView android:id="@+id/icon"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_alignParentTop="true"
+      android:layout_alignParentBottom="true"
+      android:layout_marginRight="4dip"
+      android:layout_weight="1"
+      />
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:layout_weight="8"
+      >
+    <TextView android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
+    <TextView android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
+    <TextView android:id="@+id/dctext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
+  </LinearLayout>
+  <ImageView android:id="@+id/icondc"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_weight="1"
+      />
+</LinearLayout>
