@@ -2,12 +2,14 @@ package com.example.oniichan.lunchlist;
 
 import android.app.TabActivity;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,10 +31,12 @@ public class LunchList extends TabActivity {
   EditText notes=null;
   RadioGroup types=null;
   Restaurant current=null;
+  int progress=0;
   
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    requestWindowFeature(Window.FEATURE_PROGRESS);
     setContentView(R.layout.main);
     
     name=(EditText)findViewById(R.id.name);
@@ -87,8 +91,26 @@ public class LunchList extends TabActivity {
       
       return(true);
     }
+    else if (item.getItemId()==R.id.run) {
+      setProgressBarVisibility(true);
+      progress=0;
+      new Thread(longTask).start();    
+      
+      return(true);
+    }
     
     return(super.onOptionsItemSelected(item));
+  }
+  
+  private void doSomeLongWork(final int incr) {
+    runOnUiThread(new Runnable() {
+      public void run() {
+        progress+=incr;
+        setProgress(progress);
+      }
+    });
+    
+    SystemClock.sleep(250); // should be something more useful!
   }
   
   private View.OnClickListener onSave=new View.OnClickListener() {
@@ -137,6 +159,20 @@ public class LunchList extends TabActivity {
       }
       
       getTabHost().setCurrentTab(1);
+    }
+  };
+  
+  private Runnable longTask=new Runnable() {
+    public void run() {
+      for (int i=0;i<20;i++) {
+        doSomeLongWork(500);
+      }
+      
+      runOnUiThread(new Runnable() {
+        public void run() {
+          setProgressBarVisibility(false);
+        }
+      });
     }
   };
   
