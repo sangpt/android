@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class LunchList extends TabActivity {
@@ -63,7 +64,7 @@ public class LunchList extends TabActivity {
 
     spec=getTabHost().newTabSpec("tag3");
     spec.setContent(R.id.saleoff);
-    spec.setIndicator("Take out", getResources()
+    spec.setIndicator("Type", getResources()
             .getDrawable(R.drawable.list));
     getTabHost().addTab(spec);
 
@@ -121,9 +122,19 @@ public class LunchList extends TabActivity {
           break;
       }
       adapter.add(r);
-
-      if(r.getType().equals("take_out"))
-        adapterSaleOff.add(r);
+      adapterSaleOff.add(r);
+//      if(r.getType().equals("take_out"))
+//        adapterSaleOff.add(r);
+      adapterSaleOff.sort(new Comparator<Restaurant>() {
+        @Override
+        public int compare(Restaurant o1, Restaurant o2) {
+          List<String> a = new ArrayList<String>();
+          a.add("take_out");
+          a.add("sit_down");
+          a.add("delivery");
+          return a.indexOf(o1.getType()) < a.indexOf(o2.getType()) ? 0 : 1;
+        }
+      });
     }
   };
   
