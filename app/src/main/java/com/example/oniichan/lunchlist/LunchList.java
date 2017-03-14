@@ -29,7 +29,6 @@ public class LunchList extends TabActivity {
 
   List<Restaurant> modelSaleOff=new ArrayList<Restaurant>();
   RestaurantAdapter2 adapterSaleOff=null;
-  int maxDiscount = -1;
   
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -64,7 +63,7 @@ public class LunchList extends TabActivity {
 
     spec=getTabHost().newTabSpec("tag3");
     spec.setContent(R.id.saleoff);
-    spec.setIndicator("Max Discount", getResources()
+    spec.setIndicator("Take out", getResources()
             .getDrawable(R.drawable.list));
     getTabHost().addTab(spec);
 
@@ -123,14 +122,8 @@ public class LunchList extends TabActivity {
       }
       adapter.add(r);
 
-      maxDiscount = findMaxDiscount();
-      if(Integer.parseInt(r.getDiscount().replace("dc", "")) >= maxDiscount)
+      if(r.getType().equals("take_out"))
         adapterSaleOff.add(r);
-      // update max discount
-      for(int i=0;i<modelSaleOff.size();i++){
-        if(Integer.parseInt(modelSaleOff.get(i).getDiscount().replace("dc", "")) < maxDiscount)
-          modelSaleOff.remove(i);
-      }
     }
   };
   
@@ -215,7 +208,7 @@ public class LunchList extends TabActivity {
       }
 
       if (r.getDiscount().equals("dc0")) {
-        icon.setImageResource(R.drawable.ball_red);
+        icondc.setImageResource(R.drawable.ball_red);
 
       }
       else if (r.getDiscount().equals("dc25")) {
@@ -228,14 +221,6 @@ public class LunchList extends TabActivity {
         icondc.setImageResource(R.drawable.ball_green);
       }
     }
-  }
-  private int findMaxDiscount(){
-    int maxDiscount = -1;
-    for(Restaurant r: model){
-      if(Integer.parseInt(r.getDiscount().replace("dc", "")) > maxDiscount)
-        maxDiscount = Integer.parseInt(r.getDiscount().replace("dc", ""));
-    }
-    return maxDiscount;
   }
 
   class RestaurantAdapter2 extends ArrayAdapter<Restaurant> {

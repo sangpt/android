@@ -99,7 +99,7 @@
           <Button android:id="@+id/save"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:text="Cập nhật"
+              android:text="Save"
               android:layout_weight="1"
 
               />
